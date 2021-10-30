@@ -1,0 +1,11 @@
+.uni-btn-success {
+    @apply btn btn-sm border-opacity-0 hover:border-opacity-0 bg-green-500 hover:bg-green-300
+}
+
+.uni-btn-primary {
+    @apply btn btn-sm border-opacity-0 hover:border-opacity-0 bg-uni_info hover:bg-uni_info-light
+}
+
+.uni-btn-error {
+    @apply btn btn-sm border-opacity-0 hover:border-opacity-0 bg-red-500 hover:bg-red-300
+}
