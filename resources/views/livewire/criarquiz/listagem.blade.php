@@ -3,8 +3,9 @@
         <div class="flex-1">
             <select name="categorias" id="categorias" class="select select-bordered select-sm select-primary w-full max-w-xs">
                 <option disabled="disabled" selected="selected">Filtrar categoria</option>
+                <option value="todos" wire:key="todos">Todas categorias</option>
                 @foreach ($categorias as $categoria)
-                <option value="{{ $categoria['id'] }}">{{ $categoria['nome'] }}</option>
+                <option wire:key="{{ $categoria['id'] }}" value="{{ $categoria['id'] }}">{{ $categoria['nome'] }}</option>
                 @endforeach
             </select>
         </div>

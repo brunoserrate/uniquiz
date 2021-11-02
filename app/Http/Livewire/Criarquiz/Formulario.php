@@ -4,13 +4,16 @@ namespace App\Http\Livewire\Criarquiz;
 
 use Livewire\Component;
 use App\Models\Quiz;
+use App\Models\Pergunta;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class Formulario extends Component
 {
     public $form_id = 0;
     public $form = [];
     public $categorias = [];
+    public $categoria_id = '';
     public $disabled = true;
 
     public function render()
@@ -19,6 +22,27 @@ class Formulario extends Component
     }
 
     public function mount(){
+        $this->form = [
+            'quiz' => [
+                'id' => 0,
+                'nome_quiz' => '',
+                'descricao_quiz' => '',
+                'categoria_id' => '',
+            ],
+            'perguntas' => [
+                [
+                    'pergunta' => '',
+                    'pontuacao' => 0,
+                    'resposta_a' => '',
+                    'resposta_b' => '',
+                    'resposta_c' => '',
+                    'resposta_d' => '',
+                    'resposta_certa' => '',
+                ],
+            ]
+
+        ];
+
         $this->categorias = Categoria::get()->toArray();
     }
 
@@ -46,8 +70,126 @@ class Formulario extends Component
 
     }
 
+    public function updatedCategoriaId($value){
+
+        if(!empty($value)){
+            $this->form['quiz']['categoria_id'] = $value;
+        }
+    }
+
     public function limparForm(){
-        $this->form = [];
+        $this->form = [
+            'quiz' => [
+                'id' => 0,
+                'nome_quiz' => '',
+                'descricao_quiz' => '',
+                'categoria_id' => '',
+            ],
+            'perguntas' => [
+                [
+                    'pergunta' => '',
+                    'pontuacao' => 0,
+                    'resposta_a' => '',
+                    'resposta_b' => '',
+                    'resposta_c' => '',
+                    'resposta_d' => '',
+                    'resposta_certa' => '',
+                ],
+            ]
+        ];
         $this->disabled = true;
+    }
+
+    public function adicionarPergunta(){
+        $this->form['perguntas'][] = [
+            'pergunta' => '',
+            'pontuacao' => 0,
+            'resposta_a' => '',
+            'resposta_b' => '',
+            'resposta_c' => '',
+            'resposta_d' => '',
+            'resposta_certa' => '',
+        ];
+    }
+
+    public function removerPergunta($index){
+        unset($this->form['perguntas'][$index]);
+    }
+
+    public function gravarQuiz(){
+        $quiz = Quiz::create([
+            'nome' => $this->form['quiz']['nome_quiz'],
+            'descricao' => $this->form['quiz']['descricao_quiz'],
+            'categoria_id' => $this->form['quiz']['categoria_id'],
+            'usuario_id' => Auth::user()->id,
+        ]);
+
+        $quiz->save();
+
+        foreach ($this->form['perguntas'] as $key => $value) {
+
+            $resposta_certa_a = false;
+            $resposta_certa_b = false;
+            $resposta_certa_c = false;
+            $resposta_certa_d = false;
+
+            switch ($value['resposta_certa']) {
+                case 'a':
+                    $resposta_certa_a = true;
+                    $resposta_certa_b = false;
+                    $resposta_certa_c = false;
+                    $resposta_certa_d = false;
+                    break;
+                case 'b':
+                    $resposta_certa_a = false;
+                    $resposta_certa_b = true;
+                    $resposta_certa_c = false;
+                    $resposta_certa_d = false;
+                    break;
+                case 'c':
+                    $resposta_certa_a = false;
+                    $resposta_certa_b = false;
+                    $resposta_certa_c = true;
+                    $resposta_certa_d = false;
+                    break;
+                case 'd':
+                    $resposta_certa_a = false;
+                    $resposta_certa_b = false;
+                    $resposta_certa_c = false;
+                    $resposta_certa_d = true;
+                    break;
+
+                default:
+                break;
+            }
+
+            $pergunta = Pergunta::create([
+                'pergunta' => $value['pergunta'],
+                'resposta_a' => $value['resposta_a'],
+                'resposta_certa_a' => $resposta_certa_a,
+                'resposta_b' => $value['resposta_b'],
+                'resposta_certa_b' => $resposta_certa_b,
+                'resposta_c' => $value['resposta_c'],
+                'resposta_certa_c' => $resposta_certa_c,
+                'resposta_d' => $value['resposta_d'],
+                'resposta_certa_d' => $resposta_certa_d,
+                'quiz_id' => $quiz->id,
+                'pontos' => $value['pontuacao'],
+            ]);
+
+            $pergunta->save();
+
+            $pergunta = null;
+
+        }
+
+        $this->limparForm();
+
+        return redirect('app.criarquiz');
+
+    }
+
+    public function desativarQuiz($quiz_id){
+
     }
 }
