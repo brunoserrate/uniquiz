@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-row mb-5">
         <div class="flex-1">
-            <select name="categorias" id="categorias" class="select select-bordered select-sm select-primary w-full max-w-xs">
+            <select wire:model="categoria_id" name="categorias" id="categorias" class="select select-bordered select-sm select-primary w-full max-w-xs">
                 <option disabled="disabled" selected="selected">Filtrar categoria</option>
                 <option value="todos" wire:key="todos">Todas categorias</option>
                 @foreach ($categorias as $categoria)
