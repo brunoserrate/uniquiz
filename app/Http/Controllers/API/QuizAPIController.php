@@ -28,9 +28,7 @@ class QuizAPIController extends AppBaseController
 
     public function create() {
 
-        $quizzes = $this->quizRepository->all();
-
-        return view('app.jogarquiz', ['quizzes' => $quizzes->toArray()]);
+        return view('app.jogarquiz');
     }
 
     /**

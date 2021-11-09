@@ -2,7 +2,7 @@
     <div class="flex flex-row mb-5">
         <div class="flex-1">
             <select wire:model="categoria_id" name="categorias" id="categorias" class="select select-bordered select-sm select-primary w-full max-w-xs">
-                <option disabled="disabled" selected="selected">Filtrar categoria</option>
+                <option value="" disabled>Filtrar categoria</option>
                 <option value="todos" wire:key="todos">Todas categorias</option>
                 @foreach ($categorias as $categoria)
                 <option wire:key="{{ $categoria['id'] }}" value="{{ $categoria['id'] }}">{{ $categoria['nome'] }}</option>
