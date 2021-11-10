@@ -1,58 +1,113 @@
--- Criar a database
-CREATE DATABASE `uniquiz`;
--- Tabelas
-create table pergunta(
-    id bigint PRIMARY KEY,
-    pergunta varchar(300) NOT NULL,
-    resposta_a varchar(100) NOT NULL,
-    resposta_certa_a tinyint NOT NULL,
-    resposta_b varchar(100) NOT NULL,
-    resposta_certa_b tinyint NOT NULL,
-    resposta_c varchar(100) NOT NULL,
-    resposta_certa_c tinyint NOT NULL,
-    resposta_d varchar (100) NOT NULL,
-    resposta_certa_d tinyint NOT NULL,
-    quiz_id bigint NOT NULL,
-    pontos int NOT NULL,
-    data_criacao timestamp,
-    data_atualizacao timestamp
+DROP TABLE IF EXISTS `categoria`;
+CREATE TABLE `categoria` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `nome` varchar(50) NOT NULL,
+    `data_criacao` timestamp NULL DEFAULT NULL,
+    `data_atualizacao` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
 );
-create table quiz(
-    id bigint PRIMARY KEY,
-    nome varchar(100) NOT NULL,
-    descricao varchar(300) NOT NULL,
-    categoria_id int NOT NULL,
-    data_criacao timestamp,
-    data_atualizacao timestamp,
-    usuario_id bigint NOT NULL
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `uuid` varchar(255) COLLATE  NOT NULL,
+    `connection` text COLLATE  NOT NULL,
+    `queue` text COLLATE  NOT NULL,
+    `payload` longtext COLLATE  NOT NULL,
+    `exception` longtext COLLATE  NOT NULL,
+    `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 );
-create table categoria(
-    id int PRIMARY KEY,
-    nome varchar(50) NOT NULL,
-    data_criacao timestamp,
-    data_atualizacao timestamp
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `migration` varchar(255) COLLATE  NOT NULL,
+    `batch` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
 );
-create table ranking(
-    id bigint PRIMARY KEY,
-    pontuacao int NOT NULL,
-    tentativas int NOT NULL,
-    data_criacao timestamp,
-    data_atualizacao timestamp,
-    usuario_id bigint NOT NULL,
-    quiz_id bigint NOT NULL
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
+    `email` varchar(255) COLLATE  NOT NULL,
+    `token` varchar(255) COLLATE  NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    KEY `password_resets_email_index` (`email`)
 );
-CREATE TABLE `usuario` (
-    `id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `nome` varchar(255) NOT NULL,
-    `apelido` varchar(255) NULL,
-    `email` varchar(255) NOT NULL,
-    `senha` varchar(255) NOT NULL,
-    `ativo` tinyint NOT NULL,
-    `data_criacao` timestamp NULL,
-    `data_atualizacao` timestamp NULL
+DROP TABLE IF EXISTS `pergunta`;
+CREATE TABLE `pergunta` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `pergunta` varchar(300) NOT NULL,
+    `resposta_a` varchar(100) NOT NULL,
+    `resposta_certa_a` tinyint(4) NOT NULL,
+    `resposta_b` varchar(100) NOT NULL,
+    `resposta_certa_b` tinyint(4) NOT NULL,
+    `resposta_c` varchar(100) NOT NULL,
+    `resposta_certa_c` tinyint(4) NOT NULL,
+    `resposta_d` varchar(100) NOT NULL,
+    `resposta_certa_d` tinyint(4) NOT NULL,
+    `quiz_id` bigint(20) NOT NULL,
+    `pontos` int(11) NOT NULL,
+    `data_criacao` timestamp NULL DEFAULT NULL,
+    `data_atualizacao` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `quiz_id` (`quiz_id`),
+    CONSTRAINT `pergunta_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE RESTRICT
 );
--- Adicinar auto increment
-ALTER TABLE `categoria` CHANGE `id` `id` int NOT NULL AUTO_INCREMENT FIRST;
-ALTER TABLE `pergunta` CHANGE `id` `id` bigint NOT NULL AUTO_INCREMENT FIRST;
-ALTER TABLE `quiz` CHANGE `id` `id` bigint NOT NULL AUTO_INCREMENT FIRST;
-ALTER TABLE `ranking` CHANGE `id` `id` bigint NOT NULL AUTO_INCREMENT FIRST;
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE `personal_access_tokens` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `tokenable_type` varchar(255) COLLATE  NOT NULL,
+    `tokenable_id` bigint(20) unsigned NOT NULL,
+    `name` varchar(255) COLLATE  NOT NULL,
+    `token` varchar(64) COLLATE  NOT NULL,
+    `abilities` text COLLATE ,
+    `last_used_at` timestamp NULL DEFAULT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+    KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`, `tokenable_id`)
+);
+DROP TABLE IF EXISTS `quiz`;
+CREATE TABLE `quiz` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `nome` varchar(100) NOT NULL,
+    `descricao` varchar(300) NOT NULL,
+    `categoria_id` int(11) NOT NULL,
+    `data_criacao` timestamp NULL DEFAULT NULL,
+    `data_atualizacao` timestamp NULL DEFAULT NULL,
+    `usuario_id` bigint(20) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `categoria_id` (`categoria_id`),
+    KEY `usuario_id` (`usuario_id`),
+    CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`) ON DELETE RESTRICT,
+    CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT
+);
+DROP TABLE IF EXISTS `ranking`;
+CREATE TABLE `ranking` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `pontuacao` int(11) NOT NULL,
+    `tentativas` int(11) NOT NULL,
+    `data_criacao` timestamp NULL DEFAULT NULL,
+    `data_atualizacao` timestamp NULL DEFAULT NULL,
+    `usuario_id` bigint(20) NOT NULL,
+    `quiz_id` bigint(20) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `usuario_id` (`usuario_id`),
+    CONSTRAINT `ranking_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT,
+    CONSTRAINT `ranking_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT
+);
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE  NOT NULL,
+    `apelido` varchar(255) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+    `email` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+    `email_verified_at` timestamp NULL DEFAULT NULL,
+    `password` varchar(255) CHARACTER SET utf8mb4 COLLATE  NOT NULL,
+    `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE  DEFAULT NULL,
+    `ativo` tinyint(4) NOT NULL DEFAULT '1',
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `users_email_unique` (`email`)
+);

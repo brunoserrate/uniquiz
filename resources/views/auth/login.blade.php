@@ -5,10 +5,8 @@
                 <img src="img/logo.png" width="75%" alt="logo">
             </div>
             <div class="text-center text-white px-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Ullam itaque incidunt facilis nesciunt dolorum necessitatibus, fugiat neque vitae est, deleniti asperiores
-                in odio ratione.
-                Incidunt odit soluta dolores perferendis facere!
+                <strong>Uniquiz</strong> é um site em que você pode testar seus conhecimentos,
+                os dos seus amigos, criar novos desafios com perguntas e respostas!
             </div>
         </div>
 
