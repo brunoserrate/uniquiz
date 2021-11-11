@@ -38,15 +38,15 @@
                         </label>
                     </div>
                     <div class="mt-2">
-                        <button type="submit" class="btn btn-sm bg-uni_info border border-transparent hover:bg-uni_info-light active:bg-uni_info-dark rounded-full w-full">
+                        <button type="submit" class="uni-btn-primary rounded-full w-full">
                             Entrar
                         </button>
                     </div>
                     <div class="grid grid-flow-col gap-3 mt-2">
-                        <a class="btn btn-sm border border-transparent hover:bg-uni_info-light active:bg-uni_info-dark bg-uni_info rounded-full w-full" href="{{ route('register') }}" >Criar conta</a>
+                        <a class="uni-btn-primary rounded-full w-full" href="{{ route('register') }}">Criar conta</a>
 
                         @if (Route::has('password.request'))
-                        <a class="btn btn-sm border border-transparent hover:bg-uni_info-light active:bg-uni_info-dark bg-uni_info rounded-full w-full" href="{{ route('password.request') }}">
+                        <a class="uni-btn-primary rounded-full w-full" href="{{ route('password.request') }}">
                             {{ __('Esqueceu a senha?') }}
                         </a>
                         @endif

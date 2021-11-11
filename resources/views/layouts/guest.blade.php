@@ -20,10 +20,10 @@
     @livewireStyles
 </head>
 
-<body class="bg-uni_primary">
+<body class="bg-uni_primary h-screen">
     <div>
         {{ $slot }}
-        <div class="w-full flex flex-col">
+        <div class="w-full flex flex-col mt-8">
             <livewire:uniquizrepo />
         </div>
     </div>

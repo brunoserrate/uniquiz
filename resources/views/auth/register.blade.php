@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full h-full flex flex-wrap px-4 pt-4">
+    <div class="w-full flex flex-wrap px-4 pt-4">
 
         <div class="w-full flex flex-col">
             <div class="flex items-center justify-center mb-5">
