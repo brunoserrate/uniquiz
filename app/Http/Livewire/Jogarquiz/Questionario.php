@@ -4,6 +4,9 @@ namespace App\Http\Livewire\Jogarquiz;
 
 use Livewire\Component;
 use App\Models\Quiz;
+use App\Models\Ranking;
+use Illuminate\Support\Facades\Auth;
+
 class Questionario extends Component
 {
     // Front
@@ -16,6 +19,7 @@ class Questionario extends Component
     public $respondido = false;
     public $pontos = 0;
     public $finalizado = false;
+    public $tentativas = 0;
     // Front
 
     // Página
@@ -151,9 +155,21 @@ class Questionario extends Component
         $this->resposta = '';
         $this->questionario_index = 0;
         $this->finalizado = false;
+        $this->tentativas++;
 
         $this->respostas = $this->shuffle(
             $this->questionario[$this->questionario_index]['respostas']
         );
+    }
+
+    public function finalizarQuiz(){
+
+        Ranking::create([
+            'pontuacao' => $this->pontos,
+            'usuario_id' => Auth::user()->id,
+            'quiz_id' => $this->quiz_id,
+            'tentativas' => $this->tentativas,
+        ]);
+
     }
 }

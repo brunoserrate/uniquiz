@@ -54,16 +54,14 @@ class Ranking extends Model
     use HasFactory;
 
     public $table = 'ranking';
-    
+
     const CREATED_AT = 'data_criacao';
     const UPDATED_AT = 'data_atualizacao';
-
-
-
 
     public $fillable = [
         'pontuacao',
         'tentativas',
+        'quiz_id',
         'usuario_id'
     ];
 
@@ -76,7 +74,8 @@ class Ranking extends Model
         'id' => 'integer',
         'pontuacao' => 'integer',
         'tentativas' => 'integer',
-        'usuario_id' => 'integer'
+        'usuario_id' => 'integer',
+        'quiz_id' => 'integer',
     ];
 
     /**
@@ -89,8 +88,8 @@ class Ranking extends Model
         'tentativas' => 'required|integer',
         'data_criacao' => 'nullable',
         'data_atualizacao' => 'nullable',
-        'usuario_id' => 'required'
+        'usuario_id' => 'required',
+        'quiz_id' => 'required'
     ];
 
-    
 }
