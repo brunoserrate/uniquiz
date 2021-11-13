@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Jogarquiz;
 
 use Livewire\Component;
-use DB;
-
+use App\Models\Quiz;
 class Questionario extends Component
 {
     // Front
+    public $quiz_id = 0;
     public $questionario = [];
     public $questionario_index = 0;
     public $questionario_tamanho = 0;
@@ -19,11 +19,47 @@ class Questionario extends Component
     // Front
 
     // Página
-    public function mount()
-    {
-        $this->questionario = require(__DIR__ . DIRECTORY_SEPARATOR . 'questionario_01.php');
+    public function mount() {
+    }
 
-        $this->questionario = $this->embaralharPerguntas($this->questionario);
+    public function updatedQuizId($quizId){
+        $quiz = [];
+        $result = Quiz::select(
+            'quiz.*',
+            'quiz.id AS quiz_id',
+            'pergunta.*'
+        )
+        ->leftJoin('pergunta', 'pergunta.quiz_id', '=', 'quiz.id')
+        ->where('quiz.id', $quizId)
+        ->get()
+        ->toArray();
+
+        foreach ($result as $value) {
+            $quiz[] = [
+                'pergunta' => $value['pergunta'],
+                'respostas' => [
+                    [
+                        'texto' => $value['resposta_a'], // String
+                        'certa' => $value['resposta_certa_a'] // Boolean
+                    ],
+                    [
+                        'texto' => $value['resposta_b'], // String
+                        'certa' => $value['resposta_certa_b'] // Boolean
+                    ],
+                    [
+                        'texto' => $value['resposta_c'], // String
+                        'certa' => $value['resposta_certa_c'] // Boolean
+                    ],
+                    [
+                        'texto' => $value['resposta_d'], // String
+                        'certa' => $value['resposta_certa_d'] // Boolean
+                    ]
+                ]
+            ];
+
+        }
+
+        $this->questionario = $this->embaralharPerguntas($quiz);
 
         $this->reiniciar();
 

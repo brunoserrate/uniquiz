@@ -1,4 +1,5 @@
-<div style="text-align: center">
+<div style="text-align: center" x-data="{ quizid: @entangle('quiz_id') }" x-on:modulo.window="quizid = $event.detail.quizid">
+    @if (!empty($quiz_id))
     <div>
         <p class="bg-green-600 text-white {{ Session::get('success') }}">{{ Session::get('success') }}</p>
         <p class="bg-red-600 text-white {{ Session::get('error') }}">{{ Session::get('error') }}</p>
@@ -52,5 +53,6 @@
             <button wire:click="reiniciar">Reiniciar</button>
         </div>
     </div>
+    @endif
     @endif
 </div>

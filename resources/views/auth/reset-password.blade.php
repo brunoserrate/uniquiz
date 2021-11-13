@@ -3,10 +3,10 @@
 
         <div class="w-full flex flex-col">
             <div class="flex items-center justify-center mb-5">
-                <img src="img/logo_02.png" width="25%" alt="logo">
+                <img src="../img/logo_02.png" width="25%" alt="logo">
             </div>
             <div class="mb-5">
-                <form method="POST" class="flex flex-col items-center justify-center pt-3 gap-y-5" action="{{ route('password.email') }}">
+                <form method="POST" class="flex flex-col items-center justify-center pt-3 gap-y-5" action="{{ route('password.update') }}">
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     @csrf

@@ -49,6 +49,27 @@ class Formulario extends Component
     public function updatedFormId($value){
         $quiz = [];
 
+        $this->form = [
+            'quiz' => [
+                'id' => 0,
+                'nome_quiz' => '',
+                'descricao_quiz' => '',
+                'categoria_id' => '',
+            ],
+            'perguntas' => [
+                [
+                    'pergunta' => '',
+                    'pontuacao' => 0,
+                    'resposta_a' => '',
+                    'resposta_b' => '',
+                    'resposta_c' => '',
+                    'resposta_d' => '',
+                    'resposta_certa' => '',
+                ],
+            ]
+
+        ];
+
         if($value != 0){
             $quiz = Quiz::select(
                 'quiz.*',
@@ -61,9 +82,44 @@ class Formulario extends Component
             ->toArray();
 
             $this->form = [
-                'quiz' => $quiz[0],
-                'perguntas' => $quiz,
+                'quiz' => [
+                    'id' => $quiz[0]['id'],
+                    'nome_quiz' => $quiz[0]['nome'],
+                    'descricao_quiz' => $quiz[0]['descricao'],
+                ],
             ];
+
+            foreach ($quiz as $value) {
+
+                if($value['resposta_certa_a']){
+                    $resposta_certa = 'a';
+                }
+
+                if($value['resposta_certa_b']){
+                    $resposta_certa = 'b';
+                }
+
+                if($value['resposta_certa_c']){
+                    $resposta_certa = 'c';
+                }
+
+                if($value['resposta_certa_d']){
+                    $resposta_certa = 'd';
+                }
+
+                $perguntas[] = [
+                    'pergunta' => $value['pergunta'],
+                    'resposta_a' => $value['resposta_a'],
+                    'resposta_b' => $value['resposta_b'],
+                    'resposta_c' => $value['resposta_c'],
+                    'resposta_d' => $value['resposta_d'],
+                    'pontuacao' => $value['pontos'],
+                    'resposta_certa' => $resposta_certa,
+                ];
+            }
+
+            $this->form['perguntas'] = $perguntas;
+            $this->categoria_id = $quiz[0]['categoria_id'];
 
             $this->disabled = false;
         }
