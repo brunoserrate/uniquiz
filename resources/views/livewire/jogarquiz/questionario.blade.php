@@ -1,4 +1,5 @@
 <div style="text-align: center" x-data="{ quizid: @entangle('quiz_id') }" x-on:modulo.window="quizid = $event.detail.quizid">
+@if (true)
     @if (!empty($quiz_id))
     <div class="mb-4">
         <p class="bg-green-600 text-white {{ Session::get('success') }}">{{ Session::get('success') }}</p>
@@ -51,9 +52,11 @@
     <div class="row">
         <div class="col">
             <button class="uni-btn-primary-md w-48" wire:click="reiniciar">Reiniciar</button>
-            <button class="uni-btn-success-md ml-4 w-48" wire:click="finalizarQuiz">Finalizar</button>
+            <button class="uni-btn-success-md ml-4 w-48" wire:click="finalizarQuiz" x-on:click="$dispatch('modulo', {modulo: 'listagem'})">Finalizar</button>
         </div>
     </div>
     @endif
     @endif
+@endif
+
 </div>

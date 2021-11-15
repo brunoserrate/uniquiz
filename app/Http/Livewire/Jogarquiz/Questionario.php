@@ -41,6 +41,7 @@ class Questionario extends Component
         foreach ($result as $value) {
             $quiz[] = [
                 'pergunta' => $value['pergunta'],
+                'pontos' => $value['pontos'],
                 'respostas' => [
                     [
                         'texto' => $value['resposta_a'], // String
@@ -63,14 +64,16 @@ class Questionario extends Component
 
         }
 
-        $this->questionario = $this->embaralharPerguntas($quiz);
+        if(!empty($quiz)){
+            $this->questionario = $this->embaralharPerguntas($quiz);
 
-        $this->reiniciar();
+            $this->reiniciar();
 
-        $this->questionario_tamanho = count($this->questionario);
-        $this->respostas = $this->shuffle(
-            $this->questionario[$this->questionario_index]['respostas']
-        );
+            $this->questionario_tamanho = count($this->questionario);
+            $this->respostas = $this->shuffle(
+                $this->questionario[$this->questionario_index]['respostas']
+            );
+        }
     }
 
     public function render()
@@ -124,7 +127,7 @@ class Questionario extends Component
         $this->respondido = true;
 
         if ($this->respostas[$this->resposta]['certa']) {
-            $this->pontos += 10;
+            $this->pontos += $this->questionario[$this->questionario_index]['pontos'];
             session()->flash('success', 'Resposta correta');
         } else {
             session()->flash('error', 'Resposta incorreta');

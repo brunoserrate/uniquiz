@@ -34,6 +34,7 @@ module.exports = {
             pink: colors.pink,
             // Custom
             uni_primary: {
+                light: '#8696d5',
                 DEFAULT: '#253369'
             },
             uni_info: {
@@ -49,6 +50,7 @@ module.exports = {
         borderColor: ['label-checked'],
         opacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
         textColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
+        ringOffsetColor: ['hover', 'active', 'focus'],
     },
 
     plugins: [

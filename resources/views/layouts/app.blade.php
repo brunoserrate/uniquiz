@@ -17,6 +17,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <style>
+        :root{
+            --p:228 48% 28%;
+            --bc:228 48% 8%;
+            --nf:228 48% 68%;
+        }
+    </style>
     @livewireStyles
 </head>
 

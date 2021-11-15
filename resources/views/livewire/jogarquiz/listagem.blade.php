@@ -13,4 +13,9 @@
         </button>
         @endif
     </div>
+    @if (!empty($quiz_id))
+    <div>
+        <strong>Descrição: </strong>{{ $descricao }}
+    </div>
+    @endif
 </div>
