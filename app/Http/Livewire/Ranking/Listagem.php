@@ -39,6 +39,7 @@ class Listagem extends Component
                         )
                         ->leftJoin('users', 'users.id', '=', 'ranking.usuario_id')
                         ->where('ranking.quiz_id', $quizId)
+                        ->where('quiz.ativo', 1)
                         ->orderBy('ranking.pontuacao', 'DESC')
                         ->orderBy('ranking.data_criacao', 'ASC')
                         ->get()->toArray();

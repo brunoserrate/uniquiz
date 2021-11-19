@@ -17,10 +17,12 @@ class QuizRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'id',
         'nome',
         'descricao',
         'categoria_id',
-        'usuario_id'
+        'usuario_id',
+        'ativo'
     ];
 
     /**

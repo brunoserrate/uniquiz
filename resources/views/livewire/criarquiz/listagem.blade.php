@@ -23,6 +23,7 @@
                     <th>Nome do quiz</th>
                     <th>Categoria</th>
                     <th>Dt. Criação</th>
+                    <th>Ativo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,6 +33,7 @@
                     <td>{{ $quiz['nome'] }}</td>
                     <td>{{ $quiz['categoria_nome'] }}</td>
                     <td>{{ $quiz['data_criacao_formatado'] }}</td>
+                    <td class="{{ ($quiz['ativo'] == '1') ? 'text-green-600' : 'text-red-600' }} font-black text-4xl">{{ $quiz['ativo_formatado'] }}</td>
                     <td class="w-2">
                         <button x-on:click="$dispatch('modulo', {modulo: 'editar', formid: '{{$quiz['id']}}' })" class="btn btn-circle btn-sm">
                             <span class="fas fa-edit"></span>

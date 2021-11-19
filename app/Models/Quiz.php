@@ -69,7 +69,8 @@ class Quiz extends Model
         'nome',
         'descricao',
         'categoria_id',
-        'usuario_id'
+        'usuario_id',
+        'ativo'
     ];
 
     /**
@@ -82,7 +83,8 @@ class Quiz extends Model
         'nome' => 'string',
         'descricao' => 'string',
         'categoria_id' => 'integer',
-        'usuario_id' => 'integer'
+        'usuario_id' => 'integer',
+        'ativo' => 'boolean'
     ];
 
     /**

@@ -1,16 +1,25 @@
 <div x-data="{ formtype: 'criar' , formid: @entangle('form_id') }" x-on:modulo.window="formid = $event.detail.formid, formtype = ($event.detail.modulo == 'editar' )? 'editar': 'criar' ">
     <form>
+        <p class="bg-red-600 text-white {{ Session::get('error') }}">{{ Session::get('error') }}</p>
         <div class="flex flex-col mb-5">
             <div class="flex flex-row w-full justify-end">
                 <button x-on:click="$dispatch('modulo', {modulo: 'listagem'})" wire:click="limparForm" class="uni-btn-primary mr-3">
                     <span class="fas fa-arrow-left mr-3"></span>
                     Voltar
                 </button>
-                <button x-on:click="$dispatch('modulo', {modulo: 'listagem'})" wire:click="desativarQuiz({{ $form['quiz']['id'] }})" x-show="formtype == 'editar' " class="uni-btn-error mr-3">
+
+                @if ($form['quiz']['ativo'] == 1)
+                <button x-on:click="$dispatch('modulo', {modulo: 'listagem'})" wire:click="desativarQuiz({{ $form['quiz']['id'] }})" x-show="formtype == 'editar'" class="uni-btn-error">
                     <span class="fas fa-times mr-3"></span>
                     Desativar
                 </button>
-                <button type="submit" x-on:click="$dispatch('modulo', {modulo: 'listagem'})" wire:click="gravarQuiz" class="uni-btn-success">
+                @elseif ($form['quiz']['ativo'] == 0)
+                <button x-on:click="$dispatch('modulo', {modulo: 'listagem'})" wire:click="reativarQuiz({{ $form['quiz']['id'] }})" x-show="formtype == 'editar'" class="uni-btn-success">
+                    <span class="fas fa-redo mr-3"></span>
+                    Reativar
+                </button>
+                @endif
+                <button type="submit" x-on:click="$dispatch('modulo', {modulo: 'listagem'})" x-show="formtype != 'editar'" wire:click="gravarQuiz" class="uni-btn-success">
                     <span class="fas fa-save mr-3"></span>
                     Gravar
                 </button>

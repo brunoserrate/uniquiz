@@ -28,6 +28,7 @@ class Formulario extends Component
                 'nome_quiz' => '',
                 'descricao_quiz' => '',
                 'categoria_id' => '',
+                'ativo' => 1,
             ],
             'perguntas' => [
                 [
@@ -55,6 +56,7 @@ class Formulario extends Component
                 'nome_quiz' => '',
                 'descricao_quiz' => '',
                 'categoria_id' => '',
+                'ativo' => 1,
             ],
             'perguntas' => [
                 [
@@ -86,6 +88,7 @@ class Formulario extends Component
                     'id' => $quiz[0]['id'],
                     'nome_quiz' => $quiz[0]['nome'],
                     'descricao_quiz' => $quiz[0]['descricao'],
+                    'ativo' => $quiz[0]['ativo'],
                 ],
             ];
 
@@ -140,6 +143,7 @@ class Formulario extends Component
                 'nome_quiz' => '',
                 'descricao_quiz' => '',
                 'categoria_id' => '',
+                'ativo' => 1,
             ],
             'perguntas' => [
                 [
@@ -241,11 +245,25 @@ class Formulario extends Component
 
         $this->limparForm();
 
-        return redirect('app.criarquiz');
-
     }
 
     public function desativarQuiz($quiz_id){
+
+        Quiz::where('id', $quiz_id)
+        ->update([
+            'ativo' => 0,
+            'data_atualizacao' => date('Y-m-d H:i:s'),
+        ]);
+
+    }
+
+    public function reativarQuiz($quiz_id){
+
+        Quiz::where('id', $quiz_id)
+        ->update([
+            'ativo' => 1,
+            'data_atualizacao' => date('Y-m-d H:i:s'),
+        ]);
 
     }
 }

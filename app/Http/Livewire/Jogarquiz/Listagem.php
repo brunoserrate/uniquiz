@@ -12,7 +12,7 @@ class Listagem extends Component {
     public $descricao = '';
 
     public function mount(){
-        $this->quizzes = Quiz::get()->toArray();
+        $this->quizzes = Quiz::where('ativo', 1)->get()->toArray();
         $this->quiz_id = '';
         $this->descricao = '';
     }
