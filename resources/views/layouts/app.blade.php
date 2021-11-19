@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="../img/logo_icon.png" sizes="16x16 32x32" type="image/png">
 
     <title>{{ config('app.name', 'Uniquiz') }}</title>
 
@@ -16,6 +17,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <style>
+        :root{
+            --p:228 48% 28%;
+            --bc:228 48% 8%;
+            --nf:228 48% 68%;
+        }
+    </style>
     @livewireStyles
 </head>
 

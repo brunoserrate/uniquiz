@@ -20,7 +20,7 @@
                 <span class="fas fa-file-medical mr-2"></span>
                 Criar quiz
             </a>
-            <a class="btn btn-ghost btn-sm rounded-btn {{ ($params == 'ranking') ? 'btn-active' : '' }}" href="{{ route('ranking') }}">
+            <a class="btn btn-ghost btn-sm rounded-btn {{ ($params == 'ranking') ? 'btn-active' : '' }} " href="{{ route('ranking') }}">
                 <span class="fas fa-crown mr-2"></span>
                 Ranking
             </a>

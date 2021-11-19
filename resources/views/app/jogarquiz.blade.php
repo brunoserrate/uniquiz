@@ -1,11 +1,10 @@
 <x-app-layout>
-    <div class="m-4">
-
-        <select name="quizzes" id="quizzes" class="select select-bordered select-primary w-full max-w-xs">
-            <option disabled="disabled" selected="selected">Escolha um quiz</option>
-            @foreach ($quizzes as $quiz)
-            <option value="{{ $quiz['nome'] }}">{{ $quiz['nome'] }}</option>
-            @endforeach
-        </select>
+    <div x-cloak x-data="{ modulo: 'listagem' }" x-on:modulo.window="modulo = $event.detail.modulo" class="p-5">
+        <div x-show="modulo == 'listagem'">
+            <livewire:jogarquiz.listagem />
+        </div>
+        <div x-show="modulo == 'questionario'">
+            <livewire:jogarquiz.questionario />
+        </div>
     </div>
 </x-app-layout>

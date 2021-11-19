@@ -18,3 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 // Route::resource('quizzes', App\Http\Controllers\API\QuizAPIController::class);
+
+
+Route::resource('categorias', App\Http\Controllers\API\CategoriaAPIController::class);
+
+
+Route::resource('perguntas', App\Http\Controllers\API\PerguntaAPIController::class);
+
+
+Route::resource('rankings', App\Http\Controllers\API\RankingAPIController::class);

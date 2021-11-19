@@ -1,5 +1,3 @@
 <x-app-layout>
-    <div class="flex flex-1 items-center justify-center mt-28">
-        Ranking
-    </div>
+    <livewire:ranking.listagem />
 </x-app-layout>
