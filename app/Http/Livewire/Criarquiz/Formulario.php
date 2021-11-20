@@ -85,7 +85,7 @@ class Formulario extends Component
 
             $this->form = [
                 'quiz' => [
-                    'id' => $quiz[0]['id'],
+                    'id' => $quiz[0]['quiz_id'],
                     'nome_quiz' => $quiz[0]['nome'],
                     'descricao_quiz' => $quiz[0]['descricao'],
                     'ativo' => $quiz[0]['ativo'],
