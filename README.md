@@ -2,7 +2,8 @@
 # Uniquiz
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/brunoserrate/uniquiz/main/public/img/logo_02.png" width="50%" alt="logo">
+	<img src="https://raw.githubusercontent.com/brunoserrate/uniquiz/main/public/img/logo_02.png" width="50%" alt="logo">
+</div>
 
 <p align="center">
   <span>Português Brasileiro</span> |
