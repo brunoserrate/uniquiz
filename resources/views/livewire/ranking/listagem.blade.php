@@ -9,10 +9,10 @@
             </select>
         </div>
         <div class="flex-none justify-end">
-            <button class="uni-btn-primary mr-3">
+            <a class="uni-btn-primary mr-3" href="{{ route('inicio') }}">
                 <span class="fas fa-arrow-left mr-3"></span>
                 Voltar
-            </button>
+            </a>
         </div>
     </div>
     @if (!empty($quiz_id))

@@ -5,8 +5,8 @@
 <img src="https://raw.githubusercontent.com/brunoserrate/uniquiz/main/public/img/logo_02.png" width="50%" alt="logo">
 
 <p align="center">
-  <span>Português Brasileiro</span> |
-  <a href="./lang/english/README.md">English</a>
+  <a href="../../README.md">Português Brasileiro</a> |
+  <span>English</span>
 </p>
 
 <div align="center">
@@ -16,41 +16,40 @@
 	<img src="https://img.shields.io/badge/Livewire-2.6-blue">
 </div>
 
-O uniquiz apresenta uma interface simples e de fácil acesso para todas as idades,
-o usuário irá se cadastrar e será redirecionado para a tela principal, onde poderá criar
-novos quizzes, jogar quizzes já cadastrados e ver pontuação geral de cada quiz.
+Uniquiz presents a simple and easily accessible interface for all ages,
+the user will register and will be redirected to the main screen, where they can create
+new quizzes, play quizzes already registered and see overall score for each quiz.
 
-## Instalação
+## Installation
 
-Após baixar o projeto, baixe as dependências via [composer](https://getcomposer.org/download/)
+After download the project, install all the dependencies with [composer](https://getcomposer.org/download/)
 
 ```sh
 composer install
 ```
-
-Rode ao menos uma vez o comando:
+Run at least once the command:
 ```sh
 npm run dev
 ```
-ou
+or
 ```sh
 npm run watch
 ```
-Para compilar o CSS.
+To compile the CSS.
 
-## Inicializar
+## Start
 
-Para iniciar o projeto basta rodar o comando a seguir:
+To start the project, juts run the command below:
 
 ```sh
 php artisan serve
 ```
 
-## Licença
+## License
 
-Esse projeto está sobre a licença MIT.
+This project is licensed under an MIT License
 
-## Participantes
+## Participants
 
 - [Bruno Serrate Teixeira Jeronimo,](https://github.com/brunoserrate)
 - Gustavo Cavalcante Barnabé,
