@@ -18,6 +18,7 @@ class Questionario extends Component
     public $resposta = '';
     public $respondido = false;
     public $pontos = 0;
+    public $pontos_totais = 0;
     public $finalizado = false;
     public $tentativas = 0;
     // Front
@@ -39,6 +40,8 @@ class Questionario extends Component
         ->toArray();
 
         foreach ($result as $value) {
+            $this->pontos_totais =+ $value['pontos'];
+
             $quiz[] = [
                 'pergunta' => $value['pergunta'],
                 'pontos' => $value['pontos'],

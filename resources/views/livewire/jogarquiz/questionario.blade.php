@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col">
             <p class="font-semibold text-3xl mb-2">Questinário finalizado!</p>
-            <p class="text-4xl mb-4">Você fez: <span class="font-black">{{ $pontos }} ponto(s)</span></p>
+            <p class="text-4xl mb-4">Você fez: <span class="font-black">{{ $pontos }} / {{ $pontos_totais }} ponto(s)</span></p>
         </div>
     </div>
     @endif
