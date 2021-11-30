@@ -40,7 +40,7 @@ class Questionario extends Component
         ->toArray();
 
         foreach ($result as $value) {
-            $this->pontos_totais =+ $value['pontos'];
+            $this->pontos_totais += $value['pontos'];
 
             $quiz[] = [
                 'pergunta' => $value['pergunta'],
